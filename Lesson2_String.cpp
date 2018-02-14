@@ -120,7 +120,7 @@ bool testlongestsub()
 	if(longestsub("abc abc",7)!=-1)
 	return false;
 	//test for string with all the same characters
-	if(longestsub("bbbb",4)!=4)
+	if(longestsub("bbbb",4)!=1)
 	return false;
 	//test for string with numbers
 	if(longestsub("112233",6)!=2)
