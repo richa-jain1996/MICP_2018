@@ -125,6 +125,9 @@ bool testlongestsub()
 	//test for string with numbers
 	if(longestsub("112233",6)!=2)
 	return false;
+	//test for the given example string
+	if(longestsub("pwwkew",6)!=3)
+	return false; 
 	
 }
 int main()
