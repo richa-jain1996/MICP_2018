@@ -66,7 +66,7 @@ int longestsub(string s,int len)
 	//'i' is used to indicate the index of the string character
 	char current;
 	//current represents a current character to be checked from the string
-	int hash[256]=;
+	int hash[256];
 	for(int i=0;i<256;++i)
 		hash[i]=-1;
 	//hash is used to check the number of previous occurence of the character
@@ -83,6 +83,7 @@ int longestsub(string s,int len)
 		if(hash[s[i]]!=-1)
 		{
 			curr_count=i-hash[s[i]];
+			hash[s[i]]=i;
 		
 		}
 		//if the condition is false,curr_count is incremented and hash value is set to 1
