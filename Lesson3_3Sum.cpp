@@ -13,6 +13,7 @@ A solution set is:
 #include<cstring>
 #include<set>
 using namespace std;
+/* FUNCTION TO RETURN ALL THE UNIQUE TRIPLETS WITH SUM AS ZERO*/
 vector< pair<int, pair<int, int> > > tripletsum(int arr[],int len)
 {
 	sort(arr,arr+len);
