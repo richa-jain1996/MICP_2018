@@ -66,32 +66,35 @@ int longestsub(string s,int len)
 	//'i' is used to indicate the index of the string character
 	char current;
 	//current represents a current character to be checked from the string
-	int hash[256]={0};
+	int hash[256];
+	for(int i=0;i<256;++i)
+		hash[i]=-1;
 	//hash is used to check the number of previous occurence of the character
 	while(i<len)
 	{
 		//String is considered invalid if it contain spaces
 		if(s[i]==' ')
-		return -1;
-		
-		current=s[i];
-		//This condition will remove the repeating characters from the substring
-		if(hash[s[i]]==1)
 		{
-			while(s[start]!=current)
-			{
-				hash[s[start]]=0;
-				++start;
-				--curr_count;
-			}
-			++start;
+			return -1;
+		}
+		
+		//current=s[i];
+		//This condition will remove the repeating characters from the substring
+		if(hash[s[i]]!=-1)
+		{
+			curr_count=i-hash[s[i]];
+			hash[s[i]]=i;
+		
 		}
 		//if the condition is false,curr_count is incremented and hash value is set to 1
 		else
 		{
-			hash[s[i]]=1;
+			hash[s[i]]=i;
 			++curr_count;
-			if(curr_count>maxlen)
+			
+		}
+		if(curr_count>maxlen)
+		{
 			maxlen=curr_count;
 		}
 		++i;
@@ -106,25 +109,44 @@ bool testlongestsub()
 {
 	//test for empty string
 	if(longestsub("",0)!=0)
-	return false;
+	{
+		return false;
+	}
 	//test for string with no repeating characters
 	if(longestsub("abc",3)!=3)
-	return false;
+	{
+		return false;
+	}
 	//test for string with special but no repeating characters
 	if(longestsub("%&*aA",5)!=5)
-	return false;
+	{
+		return false;
+	}
 	//test for string with same characters but different case
 	if(longestsub("aAbBcC",6)!=6)
-	return false;
+	{
+		return false;
+	}
 	//test for string with spaces
 	if(longestsub("abc abc",7)!=-1)
-	return false;
+	{
+		return false;
+	}
 	//test for string with all the same characters
 	if(longestsub("bbbb",4)!=1)
-	return false;
+	{
+		return false;
+	}
 	//test for string with numbers
 	if(longestsub("112233",6)!=2)
-	return false;
+	{
+		return false;
+	}
+	//test for the given example string
+	if(longestsub("pwwkew",6)!=3)
+	{
+		return false;
+	}
 	
 }
 int main()
@@ -135,8 +157,8 @@ int main()
 	int len=s.length();
 	int ans=longestsub(s,len);
 	if(ans==-1)
-	cout<<"\nINVALID string!!";
+		cout<<"\nINVALID string!!";
 	else
-	cout<<"\nThe length of longest subsring without repeating characters is: "<<ans;
+		cout<<"\nThe length of longest subsring without repeating characters is: "<<ans;
 	return 0;
 }
