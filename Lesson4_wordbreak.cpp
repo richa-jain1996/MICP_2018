@@ -16,7 +16,7 @@ Output: False
 #include<cstring>
 #include<vector>
 using namespace std;
-bool findword(string word,vector<string> dict)
+bool findword(string word,vector<string>& dict)
 {
 	for(int i=0;i<dict.size();++i)
 	{
@@ -26,36 +26,31 @@ bool findword(string word,vector<string> dict)
 	return false;
 	
 }
-bool wordbreak(string str,vector<string> dict)
+bool wordbreak(string str,vector<string>& dict)
 {
-	int strlen,dictlen;
-	strlen=str.size();
-	dictlen=dict.size();
+	int strlen=str.size();
+	int dictlen=dict.size();
 	if(strlen==0)
 		return true;
 	if(dictlen==0)
 		return false;
-	int dp[strlen+1]={0};
-	
 	//An array to store the results of the subproblem
+	bool dp[strlen+1]={false};
 	for(int i=1;i<=strlen;++i)
 	{
-		if((dp[i]==0) && (findword(str.substr(0,i),dict)))
+		if(!(dp[i]) && (findword(str.substr(0,i),dict)))
 		{
-			dp[i]=1;
-			
+			dp[i]=1;	
 		}
-		if(dp[i]==1)
+		if(dp[i])
 		{
 			if(i==(strlen))
 				return true;
 			for(int j=i+1;j<=strlen;++j)
 			{
-				if((dp[j]==0) && (findword(str.substr(i,j-i),dict)))
+				if((!(dp[j])) && (findword(str.substr(i,j-i),dict)))
 				{
-					dp[j]=1;
-					
-					
+					dp[j]=1;	
 				}	
 				if((dp[j]) && (j==strlen))
 					return true;
@@ -71,40 +66,61 @@ bool t1()
 	//String is empty
 	string arr[] = {"abc"};
     vector<string> dict(arr, arr + sizeof(arr) / sizeof(arr[0]));
-    if (wordbreak("",dict)!=1) return false;
+    if (!(wordbreak("",dict))) return false;
 }
 bool t2()
 {
 	//Dictionary is empty
 	string arr[] = {""};
     vector<string> dict(arr, arr + sizeof(arr) / sizeof(arr[0]));
-    if (wordbreak("abc",dict)!=0) return false;
+    if (wordbreak("abc",dict)) return false;
 }
 bool t3()
 {
 	//String can be segmented
 	string arr[] = {"hello","richa","jain"};
     vector<string> dict(arr, arr + sizeof(arr) / sizeof(arr[0]));
-    if (wordbreak("richajain",dict)!=1) return false;
+    if (!(wordbreak("richajain",dict))) return false;
 }
 bool t4()
 {
 	//String cannot be segmented
 	string arr[] = {"abc","richa"};
     vector<string> dict(arr, arr + sizeof(arr) / sizeof(arr[0]));
-    if (wordbreak("richajain",dict)!=0) return false;
+    if (wordbreak("richajain",dict)) return false;
 }
 bool t5()
 {
 	//String contains repetitive words 
 	string arr[] = {"hello","i","am","repeating"};
     vector<string> dict(arr, arr + sizeof(arr) / sizeof(arr[0]));
-    if (wordbreak("hellohello",dict)!=1) return false;
+    if (!(wordbreak("hellohello",dict))) return false;
+}
+bool t6()
+{
+	//String contains overlapping words 
+	string arr[] = {"pen","pencil"};
+    vector<string> dict(arr, arr + sizeof(arr) / sizeof(arr[0]));
+    if (!(wordbreak("penpencil",dict))) return false;
+}
+bool t7()
+{
+	//Other overlapping case
+	string arr[] = {"he","heart","artist"};
+    vector<string> dict(arr, arr + sizeof(arr) / sizeof(arr[0]));
+    if (!(wordbreak("heartist",dict))) return false;
+}
+bool t8()
+{
+	//Other overlapping case 
+	string arr[] = {"he","heart","cat"};
+    vector<string> dict(arr, arr + sizeof(arr) / sizeof(arr[0]));
+    if (!(wordbreak("heartcat",dict))) return false;
 }
 bool testWordBreak()
 {
 	
-	if(t1() && t2() && t3() && t4() && t5())
+	if(t1() && t2() && t3() && t4() && t5() && t6() && t7() && t8())
 		return true;
 	return false;
 }
