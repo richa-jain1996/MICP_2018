@@ -32,22 +32,19 @@ void insert_node(node** head,int ele)
 }
 bool check_palindrome(int arr[],int len)
 {
-	int i=0,j=len-1;
-	while(i<j)
+	for(int i=0;i<len/2;++i)
 	{
-		if(arr[i]!=arr[j])
+		if(arr[i]!=arr[len-i-1])
 		{
 			return false;
 		}
-		++i;
-		--j;
 	}
 	return true;
 }
 bool isPalindrome(node* head,int len)
 {
 	if(head->next==NULL)
-	return true;
+		return true;
 	node *temp=head;
 	int arr[len];
 	int i=0;
