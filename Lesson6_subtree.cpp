@@ -80,16 +80,15 @@ bool t4()
 {
 	//T is not a subtree of S
 	tree *S	 = obj.createNode('H');
-	S->right		= obj.createNode('3');
-	S->right->right	 = obj.createNode('3');
-	S->left			 = obj.createNode('1');
-	S->left->left	= obj.createNode('4');
+	S->right= obj.createNode('3');
+	S->right->right	= obj.createNode('3');
+	S->left	= obj.createNode('1');
+	S->left->left= obj.createNode('4');
 	S->left->left->right = obj.createNode('G');
-	S->left->right	 = obj.createNode('6');
-
+	S->left->right= obj.createNode('6');
 	tree *T = obj.createNode('1');
-	T->right	= obj.createNode('6');
-	T->left		 = obj.createNode('4');
+	T->right= obj.createNode('6');
+	T->left	= obj.createNode('4');
 	if(obj.checkIfSubtree(S,T)!=0) return false;
 }
 bool test()
