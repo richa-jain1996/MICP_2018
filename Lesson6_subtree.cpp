@@ -44,14 +44,14 @@ struct tree
 }obj;
 
 /*TEST CASES*/
-bool t1()
+bool testBothTreesEmpty()
 {
 	// T is empty and S is empty
 	tree* S=obj.createNode('');
 	tree* T=obj.createNode('');
 	if(obj.checkIfSubtree(S,T)!=-1) return false;
 }
-bool t2()
+bool testBothTreesSame()
 {
 	//T is exactly same as S
 	tree* S=obj.createNode('A');
@@ -62,7 +62,7 @@ bool t2()
 	T->right=obj.createNode('C');
 	if(obj.checkIfSubtree(S,T)!=1) return false;
 }
-bool t3()
+bool testIfSubtree()
 {
 	//T is subtree of S
 	tree* S=obj.createNode('A');
@@ -76,7 +76,7 @@ bool t3()
 	T->left=obj.createNode('G');
 	if(obj.checkIfSubtree(S,T)!=1) return false;	
 }
-bool t4()
+bool testIfNotSubtree()
 {
 	//T is not a subtree of S
 	tree *S	 = obj.createNode('H');
@@ -93,7 +93,7 @@ bool t4()
 }
 bool test()
 {
-	if(t2() && t3() && t4()) return true;
+	if(testBothTreesSame() && testIfSubtree() && testIfNotSubtree()) return true;
 	return false;
 }
 int main()
